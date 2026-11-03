@@ -1,0 +1,97 @@
+{
+  "ZohoPayments_listPaymentLinksUS" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listPaymentLinksUS",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "type" : "string"
+                },
+                "amount_eq" : {
+                  "description" : "Filter payment links by exact amount; must be greater than zero.",
+                  "format" : "double",
+                  "type" : "number"
+                },
+                "amount_gt" : {
+                  "description" : "Filter payment links by amounts greater than this value; must be greater than zero.",
+                  "format" : "double",
+                  "type" : "number"
+                },
+                "amount_lt" : {
+                  "description" : "Filter payment links by amounts less than this value; must be greater than zero.",
+                  "format" : "double",
+                  "type" : "number"
+                },
+                "filter_by" : {
+                  "description" : "Date range used to filter payment links. Allowed values: Date.Today, Date.ThisWeek, Date.ThisMonth, Date.ThisQuarter, Date.ThisHalfYear, Date.ThisYear, Date.PreviousDay, Date.PreviousWeek, Date.PreviousMonth, Date.PreviousQuarter, Date.PreviousHalfYear, Date.PreviousYear, Date.CustomDate, Date.Last_7_Days, Date.Last_30_Days, Date.Last_90_Days.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Required when filter_by is Date.CustomDate (e.g. 2024-08-16).",
+                  "type" : "string"
+                },
+                "page" : {
+                  "description" : "Page number of the payment links list (e.g. 1).",
+                  "type" : "integer"
+                },
+                "per_page" : {
+                  "description" : "Number of payment links per page (default 25, max 200).",
+                  "type" : "integer"
+                },
+                "search_text" : {
+                  "description" : "Search payment links by text like payment link ID, email, or reference.",
+                  "type" : "string"
+                },
+                "sort_column" : {
+                  "description" : "Column to sort payment links by. Confirmed value: created_time.",
+                  "enum" : [ "created_time" ],
+                  "type" : "string"
+                },
+                "sort_order" : {
+                  "description" : "Sort direction. Use A for ascending or D for descending.",
+                  "enum" : [ "A", "D" ],
+                  "type" : "string"
+                },
+                "status" : {
+                  "description" : "Filter payment links by status. Use Status.All on its own, or a comma-separated list of Status.Active, Status.Paid, Status.Canceled, and Status.Expired.",
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "Required when filter_by is Date.CustomDate (e.g. 2024-08-13).",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/paymentlinks",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listPaymentLinksUS",
+    "scope" : [ "ZohoPay.payments.READ" ]
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "ZohoPayments_getTerminal" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getTerminal",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "terminal_id" : {
+                  "description" : "The unique identifier of the terminal device.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "terminal_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/terminal/devices/{terminal_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getTerminal",
+    "scope" : [ "ZohoPay.posterminals.READ" ]
+  },
+  "ZohoPayments_listTerminalLocations" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listTerminalLocations",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "merchant_terminal_location_id" : {
+                  "description" : "Filter locations by location identifier.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "status" : {
+                  "description" : "Filter locations by status: pending_for_verification or active.",
+                  "enum" : [ "pending_for_verification", "active" ],
+                  "type" : "string"
+                },
+                "type" : {
+                  "description" : "Filter locations by type. Confirmed via backend regex to currently accept only a single value, delivery_location - filtering by type has no practical discriminating effect until additional location types exist.",
+                  "enum" : [ "delivery_location" ],
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/terminal/locations",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listTerminalLocations",
+    "scope" : [ "ZohoPay.posterminals.READ" ]
+  },
+  "ZohoPayments_listTerminals" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listTerminals",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "serial_number" : {
+                  "description" : "Filter terminals by serial number.",
+                  "type" : "string"
+                },
+                "status" : {
+                  "description" : "Filter terminals by status: all, document_pending, assigned_to_engineer, merchant_installation_scheduled, activated, deactivated, or cancelled.",
+                  "enum" : [ "all", "document_pending", "assigned_to_engineer", "merchant_installation_scheduled", "activated", "deactivated", "cancelled" ],
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/terminal/devices",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listTerminals",
+    "scope" : [ "ZohoPay.posterminals.READ" ]
+  },
+  "ZohoPayments_updateTerminalName" : {
+    "method" : "PUT",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_updateTerminalName",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "body" : {
+              "properties" : {
+                "name" : {
+                  "description" : "The new name for the terminal.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "name" ],
+              "type" : "object"
+            },
+            "path_variables" : {
+              "properties" : {
+                "terminal_id" : {
+                  "description" : "The unique identifier of the terminal device.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "terminal_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "body", "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/terminal/devices/{terminal_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "updateTerminalName",
+    "content_type" : "application/json",
+    "scope" : [ "ZohoPay.posterminals.UPDATE" ]
+  }
+}

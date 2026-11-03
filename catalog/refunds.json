@@ -1,0 +1,151 @@
+{
+  "ZohoPayments_createRefund" : {
+    "method" : "POST",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_createRefund",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "body" : {
+              "properties" : {
+                "amount" : {
+                  "description" : "The amount to be refunded, with support for decimal places.",
+                  "format" : "double",
+                  "type" : "number"
+                },
+                "description" : {
+                  "description" : "A description of the refund.",
+                  "type" : "string"
+                },
+                "meta_data" : {
+                  "description" : "Provides metadata for the refund, which can be useful for storing additional information. The maximum size of the array can be 5. Avoid storing sensitive information (e.g. bank details, card numbers, PII). Use only for non-sensitive identifiers such as order IDs, customer IDs, or key-value pairs for reference.",
+                  "items" : {
+                    "properties" : {
+                      "key" : {
+                        "description" : "A unique key used to store metadata for reference. The maximum length of the key can be 20 characters.",
+                        "type" : "string"
+                      },
+                      "value" : {
+                        "description" : "The value associated with the key for reference. The maximum length of the value can be 500 characters.",
+                        "type" : "string"
+                      }
+                    },
+                    "type" : "object"
+                  },
+                  "type" : "array"
+                },
+                "reason" : {
+                  "description" : "Refund reason: duplicate, fraudulent, requested_by_customer, others (by user); system_initiated, expired_uncaptured_charge (by Zoho).",
+                  "type" : "string"
+                },
+                "type" : {
+                  "description" : "Refund type: initiated_by_merchant, initiated_by_customer (by user), or initiated_by_system (by Zoho).",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "reason", "amount", "type" ],
+              "type" : "object"
+            },
+            "path_variables" : {
+              "properties" : {
+                "payment_id" : {
+                  "description" : "The Payment ID associated with the refund.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "payment_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "body", "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/payments/{payment_id}/refunds",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "createRefund",
+    "content_type" : "application/json",
+    "scope" : [ "ZohoPay.refunds.CREATE" ]
+  },
+  "ZohoPayments_getRefund" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getRefund",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "refund_id" : {
+                  "description" : "The unique identifier created for the refund.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "refund_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/refunds/{refund_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getRefund",
+    "scope" : [ "ZohoPay.refunds.READ" ]
+  }
+}

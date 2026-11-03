@@ -1,0 +1,224 @@
+{
+  "ZohoPayments_getBalance" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getBalance",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/dashboard/payoutssummary",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getBalance",
+    "scope" : [ "ZohoPay.reports.READ" ]
+  },
+  "ZohoPayments_getPayout" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getPayout",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "payout_id" : {
+                  "description" : "The unique identifier created for the payout.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "payout_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/payouts/{payout_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getPayout",
+    "scope" : [ "ZohoPay.payouts.READ" ]
+  },
+  "ZohoPayments_getPayoutTransactions" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getPayoutTransactions",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "payout_id" : {
+                  "description" : "The unique identifier created for the payout.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "payout_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/payouts/{payout_id}/transactions",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getPayoutTransactions",
+    "scope" : [ "ZohoPay.payouts.READ" ]
+  },
+  "ZohoPayments_listPayouts" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listPayouts",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "filter_by" : {
+                  "description" : "Filter by date: PayoutDate.Today, PayoutDate.ThisWeek, PayoutDate.ThisMonth, PayoutDate.ThisQuarter, PayoutDate.ThisHalfYear, PayoutDate.ThisYear, PayoutDate.PreviousDay, PayoutDate.PreviousWeek, PayoutDate.PreviousMonth, PayoutDate.PreviousQuarter, PayoutDate.PreviousHalfYear, PayoutDate.PreviousYear, PayoutDate.CustomDate, PayoutDate.Last_7_Days, PayoutDate.Last_30_Days, PayoutDate.Last_90_Days.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Required when filter_by is PayoutDate.CustomDate (e.g. 2024-06-06).",
+                  "type" : "string"
+                },
+                "page" : {
+                  "description" : "Page number of the payouts list (e.g. 1).",
+                  "type" : "integer"
+                },
+                "payout_method" : {
+                  "description" : "Payout method: all, instant, or standard.",
+                  "type" : "string"
+                },
+                "per_page" : {
+                  "description" : "Number of payouts per page (default 25, max 200).",
+                  "type" : "integer"
+                },
+                "status" : {
+                  "description" : "Status: Status.All, Status.Initiated, Status.Paid, Status.Failed, Status.Canceled, Status.Withdrawals, Status.Withdrawal Initiated, Status.Withdrawn, Status.Withdrawal Failed, Status.Withdrawal Canceled.",
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "Required when filter_by is PayoutDate.CustomDate (e.g. 2024-08-30).",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/payouts",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listPayouts",
+    "scope" : [ "ZohoPay.payouts.READ" ]
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "ZohoPayments_listConnectedAccountTransactions" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listConnectedAccountTransactions",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "connected_account_id" : {
+                  "description" : "The unique identifier of the connected (sub-merchant/partner) account.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "connected_account_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "filter_by" : {
+                  "description" : "Filter by date intervals: CreatedDate.Today, CreatedDate.ThisWeek, CreatedDate.ThisMonth, CreatedDate.ThisQuarter, CreatedDate.ThisHalfYear, CreatedDate.ThisYear, CreatedDate.PreviousDay, CreatedDate.PreviousWeek, CreatedDate.PreviousMonth, CreatedDate.PreviousQuarter, CreatedDate.PreviousHalfYear, CreatedDate.PreviousYear, CreatedDate.CustomDate, CreatedDate.Last_7_Days, CreatedDate.Last_30_Days, CreatedDate.Last_90_Days.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "If the given filter_by is CreatedDate.CustomDate, this param is required (e.g. 2024-06-06).",
+                  "type" : "string"
+                },
+                "sort_column" : {
+                  "description" : "The column to sort by. Allowed values: transaction_time, amount, net_amount, customer_name, available_on, settled_time.",
+                  "enum" : [ "transaction_time", "amount", "net_amount", "customer_name", "available_on", "settled_time" ],
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "If the given filter_by is CreatedDate.CustomDate, this param is required (e.g. 2024-08-30).",
+                  "type" : "string"
+                },
+                "transaction_id" : {
+                  "description" : "The unique identifier of the transaction.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "transaction_type" : {
+                  "description" : "Filter by transaction type. Allowed values: TransactionType.All, TransactionType.Charge, TransactionType.Charge_Reversal, TransactionType.Refund, TransactionType.Payout, TransactionType.Payout_Reversal.",
+                  "enum" : [ "TransactionType.All", "TransactionType.Charge", "TransactionType.Charge_Reversal", "TransactionType.Refund", "TransactionType.Payout", "TransactionType.Payout_Reversal" ],
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/connectedaccounts/{connected_account_id}/transactions",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listConnectedAccountTransactions",
+    "scope" : [ "ZohoPay.connectedaccounts.READ" ]
+  },
+  "ZohoPayments_listConnectedAccounts" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listConnectedAccounts",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "connected_account_id" : {
+                  "description" : "Filter by a specific connected account identifier.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "filter_by" : {
+                  "description" : "Filter by date intervals: CreatedDate.Today, CreatedDate.ThisWeek, CreatedDate.ThisMonth, CreatedDate.ThisQuarter, CreatedDate.ThisHalfYear, CreatedDate.ThisYear, CreatedDate.PreviousDay, CreatedDate.PreviousWeek, CreatedDate.PreviousMonth, CreatedDate.PreviousQuarter, CreatedDate.PreviousHalfYear, CreatedDate.PreviousYear, CreatedDate.CustomDate, CreatedDate.Last_7_Days, CreatedDate.Last_30_Days, CreatedDate.Last_90_Days.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "If the given filter_by is CreatedDate.CustomDate, this param is required (e.g. 2024-06-06).",
+                  "type" : "string"
+                },
+                "sort_column" : {
+                  "description" : "Column to sort by. Only created_time is currently supported.",
+                  "enum" : [ "created_time" ],
+                  "type" : "string"
+                },
+                "sort_order" : {
+                  "description" : "Sort direction. Use A for ascending or D for descending.",
+                  "enum" : [ "A", "D" ],
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "If the given filter_by is CreatedDate.CustomDate, this param is required (e.g. 2024-08-30).",
+                  "type" : "string"
+                },
+                "under_writing_status" : {
+                  "description" : "Filter by underwriting status: all, pending, accepted, or rejected.",
+                  "enum" : [ "all", "pending", "accepted", "rejected" ],
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/connectedaccounts",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listConnectedAccounts",
+    "scope" : [ "ZohoPay.connectedaccounts.READ" ]
+  }
+}

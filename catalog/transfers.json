@@ -1,0 +1,388 @@
+{
+  "ZohoPayments_createTransfer" : {
+    "method" : "POST",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_createTransfer",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "body" : {
+              "properties" : {
+                "payment_id" : {
+                  "description" : "The unique identifier of the payment to split.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "transfer_split" : {
+                  "description" : "List of transfer splits with connected account details.",
+                  "items" : {
+                    "properties" : {
+                      "amount" : {
+                        "description" : "The transfer amount for this connected account.",
+                        "format" : "double",
+                        "type" : "number"
+                      },
+                      "connected_account_id" : {
+                        "description" : "The unique identifier of the connected account.",
+                        "type" : "string"
+                      },
+                      "description" : {
+                        "description" : "A description for this transfer split.",
+                        "type" : "string"
+                      }
+                    },
+                    "type" : "object"
+                  },
+                  "type" : "array"
+                }
+              },
+              "required" : [ "payment_id", "transfer_split" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "body", "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/transfers",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "createTransfer",
+    "content_type" : "application/json",
+    "scope" : [ "ZohoPay.transfers.CREATE" ]
+  },
+  "ZohoPayments_createTransferReversal" : {
+    "method" : "POST",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_createTransferReversal",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "body" : {
+              "properties" : {
+                "description" : {
+                  "description" : "A description for the transfer reversal.",
+                  "type" : "string"
+                },
+                "reversal_amount" : {
+                  "description" : "The amount to reverse from the transfer.",
+                  "format" : "double",
+                  "type" : "number"
+                },
+                "transfer_id" : {
+                  "description" : "The unique identifier of the parent transfer.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "reversal_amount", "transfer_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "body" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/transferreversals",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "createTransferReversal",
+    "content_type" : "application/json",
+    "scope" : [ "ZohoPay.transfers.CREATE" ]
+  },
+  "ZohoPayments_getTransfer" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getTransfer",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "transfer_id" : {
+                  "description" : "The unique identifier of the transfer.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "transfer_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/transfers/{transfer_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getTransfer",
+    "scope" : [ "ZohoPay.transfers.READ" ]
+  },
+  "ZohoPayments_getTransferReversal" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getTransferReversal",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "transfer_reversal_id" : {
+                  "description" : "The unique identifier of the transfer reversal.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "transfer_reversal_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/transferreversals/{transfer_reversal_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getTransferReversal",
+    "scope" : [ "ZohoPay.transfers.READ" ]
+  },
+  "ZohoPayments_listTransferReversals" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listTransferReversals",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "connected_account_id" : {
+                  "description" : "The unique identifier of the connected account.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "filter_by" : {
+                  "description" : "Filter by date intervals: CreatedDate.Today, CreatedDate.ThisWeek, CreatedDate.ThisMonth, CreatedDate.ThisQuarter, CreatedDate.ThisHalfYear, CreatedDate.ThisYear, CreatedDate.PreviousDay, CreatedDate.PreviousWeek, CreatedDate.PreviousMonth, CreatedDate.PreviousQuarter, CreatedDate.PreviousHalfYear, CreatedDate.PreviousYear, CreatedDate.CustomDate, CreatedDate.Last_7_Days, CreatedDate.Last_30_Days, CreatedDate.Last_90_Days.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Required when filter_by is CreatedDate.CustomDate (e.g. 2024-06-06).",
+                  "type" : "string"
+                },
+                "payment_id" : {
+                  "description" : "The unique identifier of the payment.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "refund_id" : {
+                  "description" : "The unique identifier of the refund.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "status" : {
+                  "description" : "Filter by transfer status. Allowed values: Status.All, Status.Initiated, Status.Success, Status.Failed.",
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "Required when filter_by is CreatedDate.CustomDate (e.g. 2024-08-30).",
+                  "type" : "string"
+                },
+                "transfer_id" : {
+                  "description" : "The unique identifier of the transfer.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/transferreversals",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listTransferReversals",
+    "scope" : [ "ZohoPay.transfers.READ" ]
+  },
+  "ZohoPayments_listTransfers" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listTransfers",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "connected_account_id" : {
+                  "description" : "The unique identifier of the connected account.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "filter_by" : {
+                  "description" : "Filter by date intervals: CreatedDate.Today, CreatedDate.ThisWeek, CreatedDate.ThisMonth, CreatedDate.ThisQuarter, CreatedDate.ThisHalfYear, CreatedDate.ThisYear, CreatedDate.PreviousDay, CreatedDate.PreviousWeek, CreatedDate.PreviousMonth, CreatedDate.PreviousQuarter, CreatedDate.PreviousHalfYear, CreatedDate.PreviousYear, CreatedDate.CustomDate, CreatedDate.Last_7_Days, CreatedDate.Last_30_Days, CreatedDate.Last_90_Days.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Required when filter_by is CreatedDate.CustomDate (e.g. 2024-06-06).",
+                  "type" : "string"
+                },
+                "payment_id" : {
+                  "description" : "The unique identifier of the payment.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "status" : {
+                  "description" : "Filter by transfer status. Allowed values: Status.All, Status.Initiated, Status.Success, Status.Failed.",
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "Required when filter_by is CreatedDate.CustomDate (e.g. 2024-08-30).",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/transfers",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listTransfers",
+    "scope" : [ "ZohoPay.transfers.READ" ]
+  }
+}

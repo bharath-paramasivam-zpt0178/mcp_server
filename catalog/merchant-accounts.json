@@ -1,0 +1,33 @@
+{
+  "ZohoPayments_listMerchantAccounts" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listMerchantAccounts",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : { },
+          "required" : [ ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/merchant/accounts",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listMerchantAccounts",
+    "scope" : [ "ZohoPay.account.READ" ]
+  }
+}

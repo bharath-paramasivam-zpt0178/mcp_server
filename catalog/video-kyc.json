@@ -1,0 +1,45 @@
+{
+  "ZohoPayments_getVideoKycStatus" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getVideoKycStatus",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ ],
+              "type" : "object"
+            }
+          },
+          "required" : [ ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/merchant/status",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getVideoKycStatus",
+    "scope" : [ "ZohoPay.account.READ" ]
+  }
+}

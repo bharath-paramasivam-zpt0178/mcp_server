@@ -1,0 +1,135 @@
+{
+  "ZohoPayments_createCustomer" : {
+    "method" : "POST",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_createCustomer",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "body" : {
+              "properties" : {
+                "email" : {
+                  "description" : "Email address of the customer.",
+                  "type" : "string"
+                },
+                "meta_data" : {
+                  "description" : "Provides metadata for the customer, which can be useful for storing additional information. Max 5 items. Avoid storing sensitive information (e.g. bank details, card numbers, PII). Use only for non-sensitive identifiers such as customer IDs or key-value pairs for reference.",
+                  "items" : {
+                    "properties" : {
+                      "key" : {
+                        "description" : "A unique key used to store metadata for reference. The maximum length of the key can be 20 characters.",
+                        "type" : "string"
+                      },
+                      "value" : {
+                        "description" : "The value associated with the key for reference. The maximum length of the value can be 500 characters.",
+                        "type" : "string"
+                      }
+                    },
+                    "type" : "object"
+                  },
+                  "type" : "array"
+                },
+                "name" : {
+                  "description" : "Name of the customer.",
+                  "type" : "string"
+                },
+                "phone" : {
+                  "description" : "Phone number associated with the customer.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "name", "email" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "body", "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/customers",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "createCustomer",
+    "content_type" : "application/json",
+    "scope" : [ "ZohoPay.customers.CREATE" ]
+  },
+  "ZohoPayments_getCustomer" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getCustomer",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "customer_id" : {
+                  "description" : "A unique identifier for the customer.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "customer_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/customers/{customer_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getCustomer",
+    "scope" : [ "ZohoPay.customers.READ" ]
+  }
+}

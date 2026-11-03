@@ -1,0 +1,86 @@
+{
+  "ZohoPayments_listRefundsUS" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listRefundsUS",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "amount_eq" : {
+                  "description" : "Filter refunds by exact amount.",
+                  "type" : "number"
+                },
+                "amount_gt" : {
+                  "description" : "Filter refunds by amount greater than the specified value.",
+                  "type" : "number"
+                },
+                "amount_lt" : {
+                  "description" : "Filter refunds by amount less than the specified value.",
+                  "type" : "number"
+                },
+                "filter_by" : {
+                  "description" : "Filter by date: ChargeDate.Today, ChargeDate.ThisMonth, ChargeDate.ThisYear, ChargeDate.PreviousMonth, ChargeDate.PreviousYear, ChargeDate.CustomDate, ChargeDate.Last_30_Days.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Required when filter_by is ChargeDate.CustomDate (e.g. 2024-08-06).",
+                  "type" : "string"
+                },
+                "page" : {
+                  "description" : "Page number of the refunds list (e.g. 1).",
+                  "type" : "integer"
+                },
+                "payment_method_type" : {
+                  "description" : "Payment method type.",
+                  "enum" : [ "card", "ach_debit" ],
+                  "type" : "string"
+                },
+                "per_page" : {
+                  "description" : "Number of refunds per page (default 25, max 200).",
+                  "type" : "integer"
+                },
+                "search_text" : {
+                  "description" : "Search refunds by text like refund ID, email, or reference.",
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "Required when filter_by is ChargeDate.CustomDate (e.g. 2024-08-10).",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/refunds",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listRefundsUS",
+    "scope" : [ "ZohoPay.refunds.READ" ]
+  }
+}

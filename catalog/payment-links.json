@@ -1,0 +1,298 @@
+{
+  "ZohoPayments_cancelPaymentLink" : {
+    "method" : "PUT",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_cancelPaymentLink",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "payment_link_id" : {
+                  "description" : "A unique identifier for the payment link.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "payment_link_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/paymentlinks/{payment_link_id}/cancel",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "cancelPaymentLink",
+    "scope" : [ "ZohoPay.payments.UPDATE" ]
+  },
+  "ZohoPayments_createPaymentLink" : {
+    "method" : "POST",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_createPaymentLink",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "body" : {
+              "properties" : {
+                "amount" : {
+                  "description" : "The amount to be charged, with support for decimal places.",
+                  "format" : "double",
+                  "type" : "number"
+                },
+                "currency" : {
+                  "description" : "The currency of the payment amount, represented by a 3-letter ISO currency code.",
+                  "type" : "string"
+                },
+                "description" : {
+                  "description" : "The description of the payment link. The maximum length of the description can be 500 characters.",
+                  "type" : "string"
+                },
+                "email" : {
+                  "description" : "Email address of the customer.",
+                  "type" : "string"
+                },
+                "expires_at" : {
+                  "description" : "Expiration date of the payment link (yyyy-MM-dd). Default 30 days if not set.",
+                  "type" : "string"
+                },
+                "notify_customer" : {
+                  "description" : "Specifies the notification channels to be used for notifying the customer.",
+                  "properties" : {
+                    "email" : {
+                      "description" : "Indicates whether a notification email should be sent to the customer.",
+                      "type" : "boolean"
+                    }
+                  },
+                  "type" : "object"
+                },
+                "notify_user" : {
+                  "description" : "Deprecated. Use notify_customer.email to notify the customer.",
+                  "type" : "boolean"
+                },
+                "phone" : {
+                  "description" : "The phone number associated with the payment link.",
+                  "type" : "string"
+                },
+                "reference_id" : {
+                  "description" : "An alphanumeric identifier that helps in identifying the payment. The maximum length can be 100 characters.",
+                  "type" : "string"
+                },
+                "return_url" : {
+                  "description" : "URL to redirect the customer after a successful payment. Return URL includes query parameters with payment info. See Zoho Payments developer docs for signature verification.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "amount", "description", "currency" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "body", "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/paymentlinks",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "createPaymentLink",
+    "content_type" : "application/json",
+    "scope" : [ "ZohoPay.payments.CREATE" ]
+  },
+  "ZohoPayments_getPaymentLink" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getPaymentLink",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "payment_link_id" : {
+                  "description" : "A unique identifier for the payment link.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "payment_link_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/paymentlinks/{payment_link_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getPaymentLink",
+    "scope" : [ "ZohoPay.payments.READ" ]
+  },
+  "ZohoPayments_updatePaymentLink" : {
+    "method" : "PUT",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_updatePaymentLink",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "body" : {
+              "properties" : {
+                "description" : {
+                  "description" : "The description of the payment link. The maximum length of the description can be 500 characters.",
+                  "type" : "string"
+                },
+                "email" : {
+                  "description" : "Email address of the customer.",
+                  "type" : "string"
+                },
+                "expires_at" : {
+                  "description" : "Expiration date of the payment link (yyyy-MM-dd). Default 30 days if not set.",
+                  "type" : "string"
+                },
+                "notify_customer" : {
+                  "description" : "Specifies the notification channels to be used for notifying the customer.",
+                  "properties" : {
+                    "email" : {
+                      "description" : "Indicates whether a notification email should be sent to the customer.",
+                      "type" : "boolean"
+                    }
+                  },
+                  "type" : "object"
+                },
+                "notify_user" : {
+                  "description" : "Deprecated. Use notify_customer.email to notify the customer.",
+                  "type" : "boolean"
+                },
+                "phone" : {
+                  "description" : "The phone number associated with the payment link.",
+                  "type" : "string"
+                },
+                "reference_id" : {
+                  "description" : "An alphanumeric identifier that helps in identifying the payment. The maximum length can be 100 characters.",
+                  "type" : "string"
+                },
+                "return_url" : {
+                  "description" : "A URL to which the customer will be redirected after a successful payment.",
+                  "type" : "string"
+                }
+              },
+              "type" : "object"
+            },
+            "path_variables" : {
+              "properties" : {
+                "payment_link_id" : {
+                  "description" : "A unique identifier for the payment link.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "payment_link_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "body", "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/paymentlinks/{payment_link_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "updatePaymentLink",
+    "content_type" : "application/json",
+    "scope" : [ "ZohoPay.payments.UPDATE" ]
+  }
+}

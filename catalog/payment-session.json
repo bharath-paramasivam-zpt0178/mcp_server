@@ -1,0 +1,150 @@
+{
+  "ZohoPayments_createPaymentSession" : {
+    "method" : "POST",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_createPaymentSession",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "body" : {
+              "properties" : {
+                "amount" : {
+                  "description" : "The amount to be charged, with support for decimal places.",
+                  "format" : "double",
+                  "type" : "number"
+                },
+                "currency" : {
+                  "description" : "Currency of the payment amount (3-letter ISO 4217 code, e.g. USD). See https://www.iso.org/iso-4217-currency-codes.html for supported currencies.",
+                  "type" : "string"
+                },
+                "description" : {
+                  "description" : "The description of the payment session. The maximum length of the description can be 500 characters.",
+                  "type" : "string"
+                },
+                "expires_in" : {
+                  "description" : "The expiration time for the payment session in seconds. The value must be between 300 (5 minutes) and 900 (15 minutes). Default expiry is 900 seconds (15 minutes).",
+                  "maximum" : 900,
+                  "minimum" : 300,
+                  "type" : "integer"
+                },
+                "invoice_number" : {
+                  "description" : "The invoice number of the payment session. The maximum length of the invoice number can be 50 characters.",
+                  "type" : "string"
+                },
+                "meta_data" : {
+                  "description" : "Provides metadata for the payment (max 5 items). Avoid storing sensitive information (e.g. bank details, card numbers, PII). Use only for non-sensitive identifiers such as order IDs, customer IDs, or key-value pairs for reference.",
+                  "items" : {
+                    "properties" : {
+                      "key" : {
+                        "description" : "A unique key used to store metadata for reference. The maximum length of the key can be 20 characters.",
+                        "type" : "string"
+                      },
+                      "value" : {
+                        "description" : "The value associated with the key for reference. The maximum length of the value can be 500 characters.",
+                        "type" : "string"
+                      }
+                    },
+                    "type" : "object"
+                  },
+                  "type" : "array"
+                },
+                "reference_number" : {
+                  "description" : "A reference to identify the transaction. The maximum length can be 50 characters.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "amount", "description", "currency" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "body", "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/paymentsessions",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "createPaymentSession",
+    "content_type" : "application/json",
+    "scope" : [ "ZohoPay.payments.CREATE" ]
+  },
+  "ZohoPayments_getPaymentSession" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getPaymentSession",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "payments_session_id" : {
+                  "description" : "The Payment Session ID is a unique identifier for the session.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "payments_session_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/paymentsessions/{payments_session_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getPaymentSession",
+    "scope" : [ "ZohoPay.payments.READ" ]
+  }
+}

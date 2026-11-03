@@ -1,0 +1,252 @@
+{
+  "ZohoPayments_get1099KReport" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_get1099KReport",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/reports/tax1099",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "get1099KReport",
+    "scope" : [ "ZohoPay.reports.READ" ]
+  },
+  "ZohoPayments_getAccountBalanceSummary" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getAccountBalanceSummary",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "filter_by" : {
+                  "description" : "Date-range filter in the form \"<date_field>.<preset>\". date_field must be TransactionDate (filters on transaction time) or AvailableDate (filters on the date payout funds become available - i.e. payout availability, maps to FUNDSAVAILABLEON). preset is one of: Today, ThisWeek, ThisMonth, ThisQuarter, ThisHalfYear, ThisYear, PreviousDay, PreviousWeek, PreviousMonth, PreviousQuarter, PreviousHalfYear, PreviousYear, CustomDate, Last_7_Days, Last_30_Days, Last_90_Days. Use from_date/to_date together with preset=CustomDate.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Start date for the filter_by date range (e.g. 2024-06-06). Required when filter_by is CustomDate.",
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "End date for the filter_by date range (e.g. 2024-06-30). Required when filter_by is CustomDate.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/reports/balancesummary",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getAccountBalanceSummary",
+    "scope" : [ "ZohoPay.reports.READ" ]
+  },
+  "ZohoPayments_getAllTransactionsReport" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getAllTransactionsReport",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "can_show_convenience_fee_transactions" : {
+                  "description" : "If true, restrict results to transactions that had a non-zero convenience fee charged.",
+                  "type" : "boolean"
+                },
+                "card_brand" : {
+                  "description" : "Filter by card brand: rupay, visa, union_pay, master_card, jcb, discover, diners, amex, others, or \"all\". Only applies when payment_method_type is card.",
+                  "type" : "string"
+                },
+                "card_type" : {
+                  "description" : "Filter by whether the card is domestic or international relative to the merchant's own edition/country: \"domestic\", \"international\", or \"all\". This is NOT the card funding type (credit/debit/prepaid) - it compares the card's issuing country to the merchant account's country. Only applies to card transactions.",
+                  "type" : "string"
+                },
+                "filter_by" : {
+                  "description" : "Date-range filter in the form \"<date_field>.<preset>\". date_field must be TransactionDate (filters on transaction time) or AvailableDate (filters on the date payout funds become available - i.e. payout availability, maps to FUNDSAVAILABLEON). preset is one of: Today, ThisWeek, ThisMonth, ThisQuarter, ThisHalfYear, ThisYear, PreviousDay, PreviousWeek, PreviousMonth, PreviousQuarter, PreviousHalfYear, PreviousYear, CustomDate, Last_7_Days, Last_30_Days, Last_90_Days. Use from_date/to_date together with preset=CustomDate.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Start date for the filter_by date range (e.g. 2024-06-06). Required when filter_by is CustomDate.",
+                  "type" : "string"
+                },
+                "payment_method_type" : {
+                  "description" : "Filter by payment method type: card, net_banking, ach_debit, upi, wallet, bank_transfer, apple_pay, or \"all\". Only applies to transaction types that carry a payment method (e.g. charge, refund).",
+                  "type" : "string"
+                },
+                "payment_type" : {
+                  "description" : "Filter by payment type: \"online\" (matches ecommerce and moto transactions), \"in_person\" (matches pos transactions), or \"all\".",
+                  "type" : "string"
+                },
+                "reference_number" : {
+                  "description" : "Filter by the reference number associated with the transaction (partial/contains match).",
+                  "type" : "string"
+                },
+                "sort_column" : {
+                  "description" : "Column to sort results by: transaction_time, amount, net_amount, fee, customer_name, available_on, or settled_time (default transaction_time).",
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "End date for the filter_by date range (e.g. 2024-06-30). Required when filter_by is CustomDate.",
+                  "type" : "string"
+                },
+                "transaction_id" : {
+                  "description" : "Filter by a specific transaction identifier.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "transaction_type" : {
+                  "description" : "Filter by transaction type(s). Must be prefixed with the literal \"TransactionType.\" followed by one or more comma-separated (up to 12) values: Charge, Charge_Reversal, Refund, Refund_Reversal, Payout, Payout_Reversal, Manual_Payout, Manual_Payout_Reversal, Chargeback, Chargeback_Fee, Chargeback_Reversal, Chargeback_Fee_Reversal, Adjustment (matches both credit and debit adjustments), Withdrawal, Withdrawal_Reversal, Reserve, Reserve_Released, Payment_Failure_Fee, Verification_Fee, Application_Fee, Application_Fee_Refund, Top_Up, Mandate_Creation_Fee, Network_Fee, Network_Fee_Refund - or \"TransactionType.All\" for every type.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/transactions",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getAllTransactionsReport",
+    "scope" : [ "ZohoPay.reports.READ" ]
+  },
+  "ZohoPayments_getTransactionFeeReport" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getTransactionFeeReport",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "fee_type" : {
+                  "description" : "Filter by fee type: network_fee (scheme/interchange/network-side fees) or processor_fee (platform/processor-side fees).",
+                  "enum" : [ "network_fee", "processor_fee" ],
+                  "type" : "string"
+                },
+                "filter_by" : {
+                  "description" : "Date-range filter in the form \"<date_field>.<preset>\", REQUIRED for this operation. date_field must be TransactionDate or AvailableDate. preset is one of: Today, ThisWeek, ThisMonth, ThisQuarter, ThisHalfYear, ThisYear, PreviousDay, PreviousWeek, PreviousMonth, PreviousQuarter, PreviousHalfYear, PreviousYear, CustomDate, Last_7_Days, Last_30_Days, Last_90_Days. Use from_date/to_date together with preset=CustomDate.",
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Start date for the filter_by date range (e.g. 2024-06-06). Required when filter_by is CustomDate.",
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "End date for the filter_by date range (e.g. 2024-06-30). Required when filter_by is CustomDate.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id", "filter_by" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/merchantfee/transaction",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getTransactionFeeReport",
+    "scope" : [ "ZohoPay.reports.READ" ]
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "ZohoPayments_getDispute" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_getDispute",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "path_variables" : {
+              "properties" : {
+                "dispute_id" : {
+                  "description" : "The unique identifier of the dispute.",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "dispute_id" ],
+              "type" : "object"
+            },
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params", "path_variables" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/disputes/{dispute_id}",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "getDispute",
+    "scope" : [ "ZohoPay.dispute.READ" ]
+  },
+  "ZohoPayments_listDisputes" : {
+    "method" : "GET",
+    "tool_spec" : {
+      "tool" : {
+        "name" : "ZohoPayments_listDisputes",
+        "inputSchema" : {
+          "type" : "object",
+          "properties" : {
+            "query_params" : {
+              "properties" : {
+                "account_id" : {
+                  "description" : "The Zoho Payments account ID.",
+                  "format" : "long",
+                  "type" : "number"
+                },
+                "dispute_state" : {
+                  "description" : "Filter disputes by their current state in the dispute lifecycle. Accepted values: `inquiry`, `inquiry_to_dispute`, `dispute`, `pre_arbitration`, `arbitration`.\n",
+                  "enum" : [ "inquiry", "inquiry_to_dispute", "dispute", "pre_arbitration", "arbitration" ],
+                  "type" : "string"
+                },
+                "filter_by" : {
+                  "description" : "Filter disputes by a predefined date range. Use `DisputeDate.CustomDate` along with `from_date` and `to_date` for a custom range. Accepted values: `DisputeDate.Today`, `DisputeDate.ThisWeek`, `DisputeDate.ThisMonth`, `DisputeDate.ThisQuarter`, `DisputeDate.ThisHalfYear`, `DisputeDate.ThisYear`, `DisputeDate.PreviousDay`, `DisputeDate.PreviousWeek`, `DisputeDate.PreviousMonth`, `DisputeDate.PreviousQuarter`, `DisputeDate.PreviousHalfYear`, `DisputeDate.PreviousYear`, `DisputeDate.CustomDate`, `DisputeDate.Last_7_Days`, `DisputeDate.Last_30_Days`, `DisputeDate.Last_90_Days`.\n",
+                  "enum" : [ "DisputeDate.Today", "DisputeDate.ThisWeek", "DisputeDate.ThisMonth", "DisputeDate.ThisQuarter", "DisputeDate.ThisHalfYear", "DisputeDate.ThisYear", "DisputeDate.PreviousDay", "DisputeDate.PreviousWeek", "DisputeDate.PreviousMonth", "DisputeDate.PreviousQuarter", "DisputeDate.PreviousHalfYear", "DisputeDate.PreviousYear", "DisputeDate.CustomDate", "DisputeDate.Last_7_Days", "DisputeDate.Last_30_Days", "DisputeDate.Last_90_Days" ],
+                  "type" : "string"
+                },
+                "from_date" : {
+                  "description" : "Start date for a custom date range. Required when `filter_by` is `DisputeDate.CustomDate`. Format: YYYY-MM-DD.",
+                  "format" : "date",
+                  "type" : "string"
+                },
+                "page" : {
+                  "description" : "Page number for paginated results. Starts at 1.",
+                  "minimum" : 1,
+                  "type" : "integer"
+                },
+                "per_page" : {
+                  "default" : 25,
+                  "description" : "Number of disputes to return per page. Default is 25; maximum is 200.",
+                  "maximum" : 200,
+                  "minimum" : 1,
+                  "type" : "integer"
+                },
+                "search_text" : {
+                  "description" : "Search disputes by dispute ID or payment ID.",
+                  "type" : "string"
+                },
+                "sort_column" : {
+                  "description" : "Column to sort disputes by: due_date, created_time, or fcy_amount.",
+                  "enum" : [ "due_date", "created_time", "fcy_amount" ],
+                  "type" : "string"
+                },
+                "sort_order" : {
+                  "description" : "Sort direction. Use `A` for ascending or `D` for descending.",
+                  "enum" : [ "A", "D" ],
+                  "type" : "string"
+                },
+                "status" : {
+                  "description" : "Filter disputes by their current status. Accepted values: `Status.All`, `Status.ActionRequired`, `Status.UnderReview`, `Status.Won`, `Status.LostAll`, `Status.Lost`, `Status.Accepted`, `Status.Closed`, `Status.PartlyWon`, `Status.DisputeActionRequired`, `Status.InquiryActionRequired`, `Status.DisputeUnderReview`, `Status.InquiryUnderReview`.\n",
+                  "enum" : [ "Status.All", "Status.ActionRequired", "Status.UnderReview", "Status.Won", "Status.LostAll", "Status.Lost", "Status.Accepted", "Status.Closed", "Status.PartlyWon", "Status.DisputeActionRequired", "Status.InquiryActionRequired", "Status.DisputeUnderReview", "Status.InquiryUnderReview" ],
+                  "type" : "string"
+                },
+                "to_date" : {
+                  "description" : "End date for a custom date range. Required when `filter_by` is `DisputeDate.CustomDate`. Format: YYYY-MM-DD.",
+                  "format" : "date",
+                  "type" : "string"
+                }
+              },
+              "required" : [ "account_id" ],
+              "type" : "object"
+            }
+          },
+          "required" : [ "query_params" ]
+        },
+        "outputSchema" : {
+          "properties" : {
+            "data" : {
+              "type" : "object"
+            },
+            "status" : {
+              "enum" : [ "failure", "success" ],
+              "type" : "string"
+            }
+          },
+          "type" : "object"
+        }
+      },
+      "call" : { },
+      "call_handler" : { }
+    },
+    "path" : "/api/v1/disputes",
+    "parent_service" : "ZohoPayments",
+    "ref_name" : "listDisputes",
+    "scope" : [ "ZohoPay.dispute.READ" ]
+  }
+}
